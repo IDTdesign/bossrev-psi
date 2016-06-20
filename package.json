@@ -2,17 +2,23 @@
   "name": "bossrev-psi",
   "version": "1.0.0",
   "description": "Pagespeed Insights for bossrevolution.com",
-  "main": "index.js",
+  "main": "Gruntfile.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Paul Radzkov",
-  "license": "MIT",
-  "dependencies": {
-    "grunt": "^1.0.1",
-    "grunt-pagespeed": "git://github.com/paulradzkov/grunt-pagespeed.git"
+  "license": "UNLICENSED",
+  "private": true,
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/IDTdesign/bossrev-psi"
+  },
+  "bugs": {
+    "url": "https://github.com/IDTdesign/bossrev-psi/issues"
   },
   "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-pagespeed": "git://github.com/paulradzkov/grunt-pagespeed.git",
     "grunt-notify": "^0.4.5",
     "time-grunt": "^1.3.0"
   }
