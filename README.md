@@ -22,7 +22,7 @@ npm install
 grunt --force
 ```
 
-The `--force` key needed to pass to the next test if speed score below treshold.
+The `--force` key needed to pass to the next test if speed score below threshold.
 
 Output example:
 
