@@ -10,9 +10,13 @@ module.exports = (grunt) ->
 
 		# bossrev variables
 		bossrev:
+			threshold:
+				desktop: 80
+				mobile: 70
 			enus:
 				url: 'https://www.bossrevolution.com/en-us'
 				paths: [
+					''
 					'/services'
 					'/services/international-calling'
 					'/services/money-transfer'
@@ -40,30 +44,48 @@ module.exports = (grunt) ->
 			options:
 				nokey: true
 				url: '<%= bossrev.enus.url %>'
-			enushomedesktop:
+			enUsHomeDesktop:
 				options:
 					url: '<%= bossrev.enus.url %>'
 					locale: 'en_US'
 					strategy: 'desktop'
-					threshold: 80
-			enuspathsdesktop:
+					threshold: '<%- bossrev.threshold.desktop %>'
+			enUsPathsDesktop:
 				options:
 					paths: '<%= bossrev.enus.paths %>'
 					locale: 'en_US'
 					strategy: 'desktop'
-					threshold: 80
-			enushomemobile:
+					threshold: '<%- bossrev.threshold.desktop %>'
+			enUsHomeMobile:
 				options:
 					url: '<%= bossrev.enus.url %>'
 					locale: 'en_US'
 					strategy: 'mobile'
-					threshold: 70
-			enuspathsmobile:
+					threshold: '<%- bossrev.threshold.mobile %>'
+			enUsPathsMobile:
 				options:
 					paths: '<%= bossrev.enus.paths %>'
 					locale: 'en_US'
 					strategy: 'mobile'
-					threshold: 70
+					threshold: '<%- bossrev.threshold.mobile %>'
+			enUsPathsDesktopToFile:
+				options:
+					paths: '<%= bossrev.enus.paths %>'
+					locale: 'en_US'
+					strategy: 'desktop'
+					threshold: '<%- bossrev.threshold.desktop %>'
+					format: "json"
+					file: "pagespeed-desktop"
+					filepath: "results/"
+			enUsPathsMobileToFile:
+				options:
+					paths: '<%= bossrev.enus.paths %>'
+					locale: 'en_US'
+					strategy: 'mobile'
+					threshold: '<%- bossrev.threshold.mobile %>'
+					format: "json"
+					file: "pagespeed-mobile"
+					filepath: "results/"
 
 		# notify
 		notify:
@@ -80,5 +102,9 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-notify'
 
 	# Register our Grunt tasks.
-	grunt.registerTask 'runpagespeed',	['pagespeed:enushomedesktop', 'pagespeed:enushomemobile', 'pagespeed:enuspathsdesktop', 'pagespeed:enuspathsmobile', 'notify:pagespeed']
-	grunt.registerTask 'default',		['runpagespeed']
+	grunt.registerTask 'desktop',	['pagespeed:enUsPathsDesktop',			'notify:pagespeed']
+	grunt.registerTask 'mobile',	['pagespeed:enUsPathsMobile',			'notify:pagespeed']
+	grunt.registerTask 'homepage',	['pagespeed:enUsHomeDesktop', 			'pagespeed:enUsHomeMobile', 		'notify:pagespeed']
+	grunt.registerTask 'all',		['pagespeed:enUsPathsDesktop', 			'pagespeed:enUsPathsMobile', 		'notify:pagespeed']
+	grunt.registerTask 'save',		['pagespeed:enUsPathsDesktopToFile', 	'pagespeed:enUsPathsMobileToFile', 	'notify:pagespeed']
+	grunt.registerTask 'default',	['all']

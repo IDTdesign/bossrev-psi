@@ -14,3 +14,7 @@ out/
 # IDE files
 .idea/
 .DS_Store
+
+# Custom
+results
+logs
