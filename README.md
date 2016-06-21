@@ -28,6 +28,8 @@ Output example:
 
 ![Screenshot taken 20 June 2016](https://habrastorage.org/files/ff7/776/697/ff7776697dd544d3beb919c93f93858e.png)
 
+File sizes in output shown [without gzip](https://github.com/addyosmani/psi/issues/35).
+
 Also the following tasks available:
 
 * `grunt all --force` — the default task: all pages, desktop and mobile.
